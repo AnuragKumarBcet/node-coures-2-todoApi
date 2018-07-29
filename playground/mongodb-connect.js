@@ -70,10 +70,24 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
     // },(err)=>{
     //     console.log(err)
     // })
-    db.collection("ToDos").findOneAndDelete({ text: "Eat Lunch" }).then((result) => {
-        console.log(result)
-    }, (err) => {
-        console.log(err)
+    // db.collection("ToDos").findOneAndDelete({ text: "Eat Lunch" }).then((result) => {
+    //     console.log(result)
+    // }, (err) => {
+    //     console.log(err)
+    // })
+
+    db.collection("Users").findOneAndUpdate({ _id : new ObjectID('5b5d6d0a46dd3d16d8e1c2c7')},
+    {
+        $set:{
+            name : "Anurag Kumar"
+        },
+        $inc : {
+            age : 1
+        }
+    },{
+        returnOriginal:false
+    }).then((res)=>{
+        console.log(res)
     })
 
     db.close()
