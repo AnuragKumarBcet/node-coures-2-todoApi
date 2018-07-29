@@ -1,9 +1,9 @@
 //const MongoClient = require('mongodb').MongoClient
 
-const{MongoClient,ObjectID} = require('mongodb')
+const { MongoClient, ObjectID } = require('mongodb')
 
-MongoClient.connect('mongodb://localhost:27017/TodoApp',(err,db)=>{
-    if(err){
+MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
+    if (err) {
         return console.log('Unable to connect to Mongo db')
     }
     console.log('Connected to Mongo Db')
@@ -39,7 +39,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp',(err,db)=>{
     //     console.log(`Unable to fetch ToDos ${err}`)
     // })
 
-    
+
     // db.collection('ToDos').find({completed: true}).count().then((count)=>{
     //     console.log('--------------------------------------------------------------------------------------------------')
     //     console.log(`Total ToDos ${count}`)
@@ -57,14 +57,24 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp',(err,db)=>{
     //     console.log(`Error while fetching users data ${err}`)
     // })
 
-    db.collection('Users').find({_id : new ObjectID("5b5d6d0a46dd3d16d8e1c2c7")}).toArray().then((docs)=>{
-        console.log('----------------------------------------------------------------------------')
-        console.log('Users')
-        console.log(JSON.stringify(docs,undefined,2))
-        console.log('----------------------------------------------------------------------------')
-    },(err)=>{
-        console.log(`Error while fetching users data ${err}`)
+    // db.collection('Users').find({_id : new ObjectID("5b5d6d0a46dd3d16d8e1c2c7")}).toArray().then((docs)=>{
+    //     console.log('----------------------------------------------------------------------------')
+    //     console.log('Users')
+    //     console.log(JSON.stringify(docs,undefined,2))
+    //     console.log('----------------------------------------------------------------------------')
+    // },(err)=>{
+    //     console.log(`Error while fetching users data ${err}`)
+    // })
+    // db.collection("ToDos").deleteMany({text : "Eat Lunch"}).then((result)=>{
+    //     console.log(result)
+    // },(err)=>{
+    //     console.log(err)
+    // })
+    db.collection("ToDos").findOneAndDelete({ text: "Eat Lunch" }).then((result) => {
+        console.log(result)
+    }, (err) => {
+        console.log(err)
     })
-    
+
     db.close()
 })
